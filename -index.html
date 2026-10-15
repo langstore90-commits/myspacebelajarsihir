@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstroVerse | Jelajahi Alam Semesta</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#080b1c;color:white;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:17px 7%;background:rgba(8,11,28,.95);border-bottom:1px solid #292d50;gap:12px}
+.logo{font-size:22px;font-weight:bold;color:#9d9dff;white-space:nowrap}
+nav a{color:white;text-decoration:none;margin-left:15px;font-size:13px}
+nav a:hover{color:#a5a5ff}
+section{padding:65px 7%}
+.hero{min-height:480px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#22245a,#080b1c 70%)}
+.hero h1{font-size:clamp(38px,8vw,75px);letter-spacing:5px;animation:muncul 1.5s ease}
+.hero p{max-width:550px;margin:20px 0;color:#c7c9e7;line-height:1.7}
+.btn{padding:13px 20px;border:none;border-radius:25px;background:#7777ff;color:white;font-weight:bold;cursor:pointer;transition:.3s;margin:5px;min-height:44px}
+.btn:hover{background:#a0a0ff;transform:translateY(-2px)}
+.stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,white,transparent),radial-gradient(2px 2px at 70% 20%,white,transparent),radial-gradient(2px 2px at 80% 70%,white,transparent),radial-gradient(2px 2px at 35% 80%,white,transparent),radial-gradient(1px 1px at 50% 50%,white,transparent);background-size:180px 180px;animation:bintang 12s linear infinite}
+.hero-content{position:relative;z-index:2}
+.solar-system{width:230px;height:230px;position:relative;margin:30px auto 0}
+.sun{position:absolute;width:48px;height:48px;background:#ffcf61;border-radius:50%;top:91px;left:91px;box-shadow:0 0 35px #ff9f43}
+.orbit{position:absolute;border:1px solid #7777ff66;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:putar linear infinite}
+.orbit.one{width:95px;height:95px;animation-duration:4s}.orbit.two{width:155px;height:155px;animation-duration:8s}.orbit.three{width:220px;height:220px;animation-duration:13s}
+.planet-dot{position:absolute;top:-6px;left:calc(50% - 6px);width:12px;height:12px;background:#b6a0ff;border-radius:50%}
+.orbit.two .planet-dot{background:#4ea5ff}.orbit.three .planet-dot{background:#62e6bd}
+@keyframes putar{to{transform:translate(-50%,-50%) rotate(360deg)}}@keyframes muncul{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes bintang{from{background-position:0 0}to{background-position:180px 180px}}
+h2{font-size:30px;margin-bottom:15px}.sub{color:#aaaed0;line-height:1.7;margin-bottom:25px}
+.planet-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.planet-card{padding:20px 10px;background:#111630;border:1px solid #292f55;border-radius:16px;text-align:center;cursor:pointer;color:white;transition:.3s;min-height:90px}
+.planet-card:hover,.planet-card.active{border-color:#8585ff;background:#202448;transform:translateY(-3px)}
+.planet-emoji{display:block;font-size:38px;margin-bottom:10px}
+.detail-box{margin-top:22px;padding:25px;background:#111630;border:1px solid #393d68;border-radius:16px;line-height:1.8}
+.detail-box h3{font-size:24px;margin-bottom:10px;color:#b2b2ff}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.info-card{padding:22px;border-radius:15px;background:#111630;border:1px solid #292f55;line-height:1.7}
+.info-card h3{margin-bottom:10px;color:#b7b7ff}
+.fact-box,.quiz-box{background:#111630;border:1px solid #343960;padding:25px;border-radius:18px;line-height:1.8}
+.answer{display:block;width:100%;text-align:left;padding:13px;border-radius:10px;border:1px solid #383d64;color:white;background:#191e3a;margin-top:10px;cursor:pointer;min-height:44px}
+.answer:hover{background:#292e58}.answer.correct{background:#15583e;border-color:#42d69a}.answer.wrong{background:#672c3c;border-color:#ff8094}.answer:disabled{cursor:default}
+#feedback{margin-top:15px;font-weight:bold}footer{text-align:center;padding:30px;border-top:1px solid #292d50;color:#9b9fbd;line-height:1.8}
+@media(max-width:650px){nav{padding:15px 4%;flex-wrap:wrap}.logo{font-size:18px}nav a{margin-left:7px;font-size:11px}section{padding:45px 5%}.planet-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.info-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">🚀 AstroVerse</div>
+  <div><a href="#home">Home</a><a href="#planet">Planet</a><a href="#belajar">Belajar</a><a href="#kuis">Kuis</a></div>
+</nav>
+<section class="hero" id="home">
+  <div class="stars"></div>
+  <div class="hero-content">
+    <h1>EXPLORE SPACE</h1>
+    <p>Selamat datang di AstroVerse! Jelajahi planet, bintang, galaksi, dan berbagai misteri alam semesta melalui pengalaman astronomi yang interaktif.</p>
+    <button class="btn" id="exploreBtn" type="button">🌌 Mulai Menjelajah</button>
+    <button class="btn" id="pauseBtn" type="button">⏸ Jeda Animasi</button>
+    <div class="solar-system" aria-label="Animasi orbit planet">
+      <div class="sun"></div><div class="orbit one"><div class="planet-dot"></div></div><div class="orbit two"><div class="planet-dot"></div></div><div class="orbit three"><div class="planet-dot"></div></div>
+    </div>
+  </div>
+</section>
+<section id="planet">
+  <h2>🪐 Jelajahi Planet</h2><p class="sub">Klik planet di bawah ini untuk mengetahui karakteristiknya.</p>
+  <div class="planet-grid" id="planetGrid"></div>
+  <div class="detail-box" id="planetDetail" aria-live="polite"></div>
+</section>
+<section id="belajar">
+  <h2>📚 Belajar Astronomi</h2><p class="sub">Kenali beberapa konsep penting dalam ilmu astronomi.</p>
+  <div class="info-grid">
+    <div class="info-card"><h3>☀️ Matahari</h3>Matahari adalah bintang di pusat Tata Surya. Cahayanya menjadi sumber energi utama bagi Bumi.</div>
+    <div class="info-card"><h3>🌍 Rotasi</h3>Rotasi adalah gerakan benda langit pada porosnya. Rotasi Bumi menyebabkan pergantian siang dan malam.</div>
+    <div class="info-card"><h3>🌎 Revolusi</h3>Revolusi adalah gerakan suatu benda langit mengelilingi benda langit lain. Bumi mengelilingi Matahari.</div>
+    <div class="info-card"><h3>🌌 Galaksi</h3>Galaksi merupakan kumpulan bintang, gas, debu, dan materi lain yang terikat oleh gravitasi. Tata Surya berada di Galaksi Bima Sakti.</div>
+    <div class="info-card"><h3>🛰️ Satelit</h3>Satelit alami adalah benda langit yang mengorbit benda lain. Bulan merupakan satelit alami Bumi.</div>
+    <div class="info-card"><h3>🧲 Gravitasi</h3>Gravitasi merupakan gaya tarik antara benda-benda yang memiliki massa. Gravitasi menjaga planet tetap mengorbit Matahari.</div>
+  </div>
+</section>
+<section>
+  <h2>✨ Fakta Astronomi</h2><div class="fact-box"><p id="factText" aria-live="polite">Cahaya Matahari memerlukan sekitar 8 menit 20 detik untuk mencapai Bumi.</p><button class="btn" id="factBtn" type="button">🔄 Fakta Berikutnya</button></div>
+</section>
+<section id="kuis">
+  <h2>🧠 Kuis Astronomi</h2><p class="sub">Uji pengetahuanmu! Pilih jawaban yang paling tepat.</p>
+  <div class="quiz-box"><h3 id="question">Pertanyaan akan muncul di sini.</h3><div id="answers"></div><p id="feedback" aria-live="polite"></p><p id="score" style="margin-top:12px">Skor: 0</p><button class="btn" id="nextBtn" type="button">Pertanyaan Berikutnya ➜</button></div>
+</section>
+<footer><h3>🚀 AstroVerse</h3><p>Jelajahi alam semesta, perluas pengetahuanmu.</p><p>Website edukasi astronomi interaktif.</p></footer>
+<script>
+const planets=[
+{name:"Merkurius",emoji:"☄️",description:"Merkurius adalah planet terkecil dan terdekat dengan Matahari.",fact:"Satu tahun di Merkurius berlangsung sekitar 88 hari Bumi."},
+{name:"Venus",emoji:"🟡",description:"Venus memiliki atmosfer sangat tebal dan merupakan planet terpanas di Tata Surya.",fact:"Venus berotasi sangat lambat dan berlawanan arah dengan kebanyakan planet."},
+{name:"Bumi",emoji:"🌍",description:"Bumi adalah tempat tinggal kita dan memiliki air dalam bentuk cair di permukaannya.",fact:"Bumi memiliki satu satelit alami, yaitu Bulan."},
+{name:"Mars",emoji:"🔴",description:"Mars dikenal sebagai Planet Merah karena permukaannya mengandung oksida besi.",fact:"Para ilmuwan meneliti Mars untuk memahami lingkungan planet tersebut."},
+{name:"Jupiter",emoji:"🟠",description:"Jupiter adalah planet terbesar di Tata Surya dan termasuk raksasa gas.",fact:"Jupiter memiliki badai raksasa yang dikenal sebagai Bintik Merah Besar."},
+{name:"Saturnus",emoji:"🪐",description:"Saturnus merupakan raksasa gas yang terkenal dengan sistem cincinnya.",fact:"Cincin Saturnus terutama tersusun dari partikel es dan batu."},
+{name:"Uranus",emoji:"🔵",description:"Uranus adalah raksasa es dengan warna biru kehijauan akibat metana di atmosfernya.",fact:"Sumbu rotasi Uranus sangat miring sehingga tampak berputar menyamping."},
+{name:"Neptunus",emoji:"🔷",description:"Neptunus adalah planet kedelapan dan terjauh dari Matahari.",fact:"Neptunus memiliki angin yang sangat kencang."}
+];
+const planetGrid=document.getElementById("planetGrid");
+const planetDetail=document.getElementById("planetDetail");
+function showPlanet(planet,card){
+ document.querySelectorAll(".planet-card").forEach(item=>item.classList.remove("active"));
+ if(card)card.classList.add("active");
+ planetDetail.innerHTML="";
+ const title=document.createElement("h3");title.textContent=planet.emoji+" "+planet.name;
+ const description=document.createElement("p");description.textContent=planet.description;
+ const fact=document.createElement("p");fact.style.marginTop="12px";fact.textContent="💡 Fakta: "+planet.fact;
+ planetDetail.append(title,description,fact);
+}
+planets.forEach(planet=>{
+ const card=document.createElement("button");card.type="button";card.className="planet-card";
+ const emoji=document.createElement("span");emoji.className="planet-emoji";emoji.textContent=planet.emoji;
+ const name=document.createElement("strong");name.textContent=planet.name;
+ card.append(emoji,name);card.addEventListener("click",()=>showPlanet(planet,card));planetGrid.appendChild(card);
+ if(planet.name==="Bumi")showPlanet(planet,card);
+});
+document.getElementById("exploreBtn").addEventListener("click",()=>document.getElementById("planet").scrollIntoView({behavior:"smooth"}));
+let animationPaused=false;
+document.getElementById("pauseBtn").addEventListener("click",function(){
+ animationPaused=!animationPaused;
+ document.querySelectorAll(".orbit").forEach(orbit=>orbit.style.animationPlayState=animationPaused?"paused":"running");
+ this.textContent=animationPaused?"▶ Lanjutkan Animasi":"⏸ Jeda Animasi";
+});
+const facts=[
+"Cahaya Matahari membutuhkan sekitar 8 menit 20 detik untuk sampai ke Bumi.",
+"Jupiter adalah planet terbesar di Tata Surya.",
+"Bulan merupakan satelit alami Bumi.",
+"Satu tahun Neptunus berlangsung sekitar 165 tahun Bumi.",
+"Matahari adalah bintang yang menjadi pusat Tata Surya.",
+"Saturnus memiliki sistem cincin yang sangat terkenal."
+];
+let factIndex=0;
+document.getElementById("factBtn").addEventListener("click",()=>{factIndex=(factIndex+1)%facts.length;document.getElementById("factText").textContent=facts[factIndex];});
+const questions=[
+{question:"1. Planet apa yang dikenal sebagai Planet Merah?",answers:["Venus","Mars","Neptunus","Merkurius"],correct:1},
+{question:"2. Planet terbesar di Tata Surya adalah...",answers:["Bumi","Saturnus","Jupiter","Mars"],correct:2},
+{question:"3. Apa nama satelit alami Bumi?",answers:["Matahari","Bulan","Titan","Europa"],correct:1},
+{question:"4. Planet yang terkenal dengan cincin yang jelas adalah...",answers:["Saturnus","Merkurius","Venus","Mars"],correct:0},
+{question:"5. Bintang yang menjadi pusat Tata Surya adalah...",answers:["Sirius","Polaris","Matahari","Vega"],correct:2}
+];
+let currentQuestion=0,score=0,answered=false;
+function showQuestion(){
+ answered=false;const question=questions[currentQuestion];
+ document.getElementById("question").textContent=question.question;
+ document.getElementById("feedback").textContent="";
+ document.getElementById("score").textContent="Skor: "+score+" dari "+questions.length;
+ const answersBox=document.getElementById("answers");answersBox.innerHTML="";
+ question.answers.forEach((answer,index)=>{
+  const button=document.createElement("button");button.type="button";button.className="answer";
+  button.textContent=String.fromCharCode(65+index)+". "+answer;
+  button.addEventListener("click",()=>{
+   if(answered)return;answered=true;
+   const allButtons=answersBox.querySelectorAll(".answer");
+   allButtons.forEach((item,i)=>{item.disabled=true;if(i===question.correct)item.classList.add("correct");});
+   if(index===question.correct){score++;button.classList.add("correct");document.getElementById("feedback").textContent="Benar! Hebat sekali! 🎉";}
+   else{button.classList.add("wrong");document.getElementById("feedback").textContent="Belum tepat. Jawaban benar: "+question.answers[question.correct];}
+   document.getElementById("score").textContent="Skor: "+score+" dari "+questions.length;
+  });
+  answersBox.appendChild(button);
+ });
+ document.getElementById("nextBtn").textContent=currentQuestion===questions.length-1?"🔄 Ulangi Kuis":"Pertanyaan Berikutnya ➜";
+}
+document.getElementById("nextBtn").addEventListener("click",()=>{
+ if(currentQuestion===questions.length-1){currentQuestion=0;score=0;}else{currentQuestion++;}
+ showQuestion();
+});
+showQuestion();
+</script>
+</body>
+</html>
