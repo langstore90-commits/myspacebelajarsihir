@@ -1,0 +1,2 @@
+# myspacebelajarsihir
+belajar aja
